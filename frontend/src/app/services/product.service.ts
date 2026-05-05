@@ -5,7 +5,7 @@ import { Product, PagedResponse } from '../models/product.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
-  private readonly baseUrl = 'http://localhost:8080/api/products';
+  private readonly baseUrl = 'https://inventara-backend-production.up.railway.app/api/products';
 
   constructor(private http: HttpClient) {}
 
