@@ -1,0 +1,38 @@
+<div class="app-wrapper">
+  <!-- Top Navigation Bar -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="brand-mark">▣</div>
+      <div class="brand-text">
+        <span class="brand-name">Inventara</span>
+        <span class="brand-tagline">Inventory Management</span>
+      </div>
+    </div>
+    <div class="topbar-status">
+      <span class="status-dot"></span>
+      <span class="status-text">API Connected</span>
+    </div>
+  </header>
+
+  <!-- Main Layout -->
+  <main class="main-content">
+    <div class="sidebar">
+      <!-- Product Form -->
+      <app-product-form
+        [editProduct]="editingProduct"
+        (productSaved)="onProductSaved()"
+        (cancelled)="onCancelled()"
+      ></app-product-form>
+
+      <!-- Category Manager -->
+      <app-category-list></app-category-list>
+    </div>
+
+    <div class="content-area">
+      <app-product-list
+        #productList
+        (editRequested)="onEditRequested($event)"
+      ></app-product-list>
+    </div>
+  </main>
+</div>

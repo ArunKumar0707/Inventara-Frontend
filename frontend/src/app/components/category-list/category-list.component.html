@@ -1,0 +1,31 @@
+<div class="category-panel">
+  <h3 class="panel-title">Categories</h3>
+
+  <div class="alert alert-success" *ngIf="successMessage">✓ {{ successMessage }}</div>
+  <div class="alert alert-error" *ngIf="errorMessage">⚠ {{ errorMessage }}</div>
+
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="category-form" novalidate>
+    <div class="inline-field">
+      <input
+        class="field-input"
+        [class.is-invalid]="hasError('name', 'required') || hasError('name', 'minlength')"
+        formControlName="name"
+        type="text"
+        placeholder="New category name…"
+      />
+      <button type="submit" class="btn-add" [disabled]="isLoading">
+        {{ isLoading ? '…' : '+' }}
+      </button>
+    </div>
+    <span class="field-error" *ngIf="hasError('name', 'required')">Name is required</span>
+    <span class="field-error" *ngIf="hasError('name', 'minlength')">At least 2 characters</span>
+  </form>
+
+  <div class="category-chips">
+    <div class="chip" *ngFor="let cat of categories">
+      <span class="chip-dot"></span>
+      {{ cat.name }}
+    </div>
+    <div class="no-categories" *ngIf="categories.length === 0">No categories yet</div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="form-panel">
+  <div class="form-header">
+    <div class="form-title-group">
+      <span class="form-icon">{{ isEditMode ? '✎' : '+' }}</span>
+      <h2 class="form-title">{{ isEditMode ? 'Edit Product' : 'New Product' }}</h2>
+    </div>
+    <p class="form-subtitle">{{ isEditMode ? 'Update product information below' : 'Fill in the details to add a product' }}</p>
+  </div>
+
+  <div class="alert alert-error" *ngIf="errorMessage">
+    <span class="alert-icon">⚠</span>
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="field-group">
+      <label class="field-label" for="name">Product Name</label>
+      <input
+        id="name"
+        class="field-input"
+        [class.is-invalid]="hasError('name', 'required') || hasError('name', 'minlength')"
+        formControlName="name"
+        type="text"
+        placeholder="e.g. Wireless Headphones"
+        autocomplete="off"
+      />
+      <span class="field-error" *ngIf="hasError('name', 'required')">Name is required</span>
+      <span class="field-error" *ngIf="hasError('name', 'minlength')">Name must be at least 2 characters</span>
+    </div>
+
+    <div class="field-row">
+      <div class="field-group">
+        <label class="field-label" for="price">Price ($)</label>
+        <input
+          id="price"
+          class="field-input"
+          [class.is-invalid]="hasError('price', 'required') || hasError('price', 'min')"
+          formControlName="price"
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="0.00"
+        />
+        <span class="field-error" *ngIf="hasError('price', 'required')">Price is required</span>
+        <span class="field-error" *ngIf="hasError('price', 'min')">Price cannot be negative</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="quantity">Quantity</label>
+        <input
+          id="quantity"
+          class="field-input"
+          [class.is-invalid]="hasError('quantity', 'required') || hasError('quantity', 'min')"
+          formControlName="quantity"
+          type="number"
+          min="0"
+          placeholder="0"
+        />
+        <span class="field-error" *ngIf="hasError('quantity', 'required')">Quantity is required</span>
+        <span class="field-error" *ngIf="hasError('quantity', 'min')">Quantity cannot be negative</span>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="categoryId">Category</label>
+      <select
+        id="categoryId"
+        class="field-select"
+        [class.is-invalid]="hasError('categoryId', 'required')"
+        formControlName="categoryId"
+      >
+        <option value="" disabled selected>Select a category…</option>
+        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+      </select>
+      <span class="field-error" *ngIf="hasError('categoryId', 'required')">Category is required</span>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-ghost" (click)="onCancel()" *ngIf="isEditMode">
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+        <span class="btn-spinner" *ngIf="isLoading"></span>
+        {{ isLoading ? 'Saving…' : (isEditMode ? 'Update Product' : 'Add Product') }}
+      </button>
+    </div>
+  </form>
+</div>

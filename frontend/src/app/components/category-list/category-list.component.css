@@ -1,0 +1,114 @@
+.category-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.panel-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+
+.alert {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  margin-bottom: 12px;
+  font-family: 'DM Mono', monospace;
+}
+
+.alert-success { background: var(--success-bg); color: var(--success); }
+.alert-error { background: var(--danger-bg); color: var(--danger); }
+
+.category-form { margin-bottom: 16px; }
+
+.inline-field {
+  display: flex;
+  gap: 8px;
+}
+
+.field-input {
+  flex: 1;
+  background: var(--input-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.field-input.is-invalid { border-color: var(--danger); }
+
+.field-input::placeholder { color: var(--text-muted); opacity: 0.5; }
+
+.btn-add {
+  width: 36px;
+  height: 36px;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-add:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.btn-add:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.field-error {
+  font-size: 0.72rem;
+  color: var(--danger);
+  display: block;
+  margin-top: 4px;
+}
+
+.category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-family: 'DM Mono', monospace;
+}
+
+.chip-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.no-categories {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+}

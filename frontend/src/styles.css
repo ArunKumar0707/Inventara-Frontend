@@ -1,0 +1,82 @@
+/* ===========================
+   GLOBAL DESIGN SYSTEM
+   Dark industrial theme with
+   warm amber accents
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,400&display=swap');
+
+/* CSS Variables – Dark Theme */
+:root {
+  --bg:              #0f0f11;
+  --surface:         #18181c;
+  --surface-raised:  #1e1e24;
+  --border:          #2a2a32;
+  --border-light:    #232329;
+  --input-bg:        #111115;
+  --table-head-bg:   #151518;
+  --row-hover:       #1c1c22;
+
+  --accent:          #e8a44a;
+  --accent-hover:    #f0b35e;
+  --accent-glow:     rgba(232, 164, 74, 0.15);
+
+  --text-primary:    #f0ede8;
+  --text-secondary:  #a09e9a;
+  --text-muted:      #636069;
+
+  --success:         #6bc98e;
+  --success-bg:      rgba(107, 201, 142, 0.1);
+  --success-border:  rgba(107, 201, 142, 0.25);
+
+  --danger:          #e06b6b;
+  --danger-bg:       rgba(224, 107, 107, 0.1);
+  --danger-border:   rgba(224, 107, 107, 0.25);
+  --danger-glow:     rgba(224, 107, 107, 0.15);
+
+  --warning:         #e8c46a;
+  --warning-bg:      rgba(232, 196, 106, 0.1);
+
+  --badge-bg:        rgba(232, 164, 74, 0.1);
+  --badge-text:      #e8a44a;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'DM Mono', monospace;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Selection */
+::selection {
+  background: var(--accent-glow);
+  color: var(--accent);
+}
+
+/* Input number spinner remove */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] { -moz-appearance: textfield; }

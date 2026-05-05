@@ -1,0 +1,113 @@
+<div class="list-panel">
+  <!-- Header -->
+  <div class="list-header">
+    <div>
+      <h2 class="list-title">Product Inventory</h2>
+      <p class="list-meta" *ngIf="pagedData">
+        Showing {{ products.length }} of {{ pagedData.totalElements }} products
+      </p>
+      <p class="list-meta" *ngIf="!pagedData && products.length">
+        {{ products.length }} products in category
+      </p>
+    </div>
+    <div class="list-controls">
+      <select class="filter-select" (change)="onCategoryFilter($any($event.target).value)">
+        <option value="">All Categories</option>
+        <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Alerts -->
+  <div class="alert alert-success" *ngIf="successMessage">
+    <span>✓</span> {{ successMessage }}
+  </div>
+  <div class="alert alert-error" *ngIf="errorMessage">
+    <span>⚠</span> {{ errorMessage }}
+  </div>
+
+  <!-- Delete Confirm Dialog -->
+  <div class="confirm-overlay" *ngIf="deleteConfirmId">
+    <div class="confirm-dialog">
+      <div class="confirm-icon">🗑</div>
+      <h3 class="confirm-title">Delete Product?</h3>
+      <p class="confirm-message">This action cannot be undone.</p>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" (click)="onDeleteCancel()">Cancel</button>
+        <button class="btn btn-danger" (click)="onDeleteConfirmed()">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-state" *ngIf="isLoading">
+    <div class="loading-spinner"></div>
+    <span>Loading products…</span>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state" *ngIf="!isLoading && products.length === 0">
+    <div class="empty-icon">📦</div>
+    <p class="empty-title">No products found</p>
+    <p class="empty-sub">Add your first product using the form on the left.</p>
+  </div>
+
+  <!-- Table -->
+  <div class="table-container" *ngIf="!isLoading && products.length > 0">
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th (click)="onSort('id')" class="sortable">
+            ID <span class="sort-icon">{{ getSortIcon('id') }}</span>
+          </th>
+          <th (click)="onSort('name')" class="sortable">
+            Name <span class="sort-icon">{{ getSortIcon('name') }}</span>
+          </th>
+          <th (click)="onSort('price')" class="sortable">
+            Price <span class="sort-icon">{{ getSortIcon('price') }}</span>
+          </th>
+          <th (click)="onSort('quantity')" class="sortable">
+            Qty <span class="sort-icon">{{ getSortIcon('quantity') }}</span>
+          </th>
+          <th>Category</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products" class="product-row">
+          <td class="id-cell">#{{ product.id }}</td>
+          <td class="name-cell">{{ product.name }}</td>
+          <td class="price-cell">${{ product.price | number:'1.2-2' }}</td>
+          <td class="qty-cell">{{ product.quantity }}</td>
+          <td>
+            <span class="category-badge">{{ product.categoryName || '—' }}</span>
+          </td>
+          <td>
+            <span class="stock-badge" [ngClass]="getStockClass(product.quantity)">
+              {{ getStockLabel(product.quantity) }}
+            </span>
+          </td>
+          <td class="action-cell">
+            <button class="action-btn edit-btn" (click)="onEdit(product)" title="Edit">✎</button>
+            <button class="action-btn delete-btn" (click)="onDeleteConfirm(product.id!)" title="Delete">✕</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="pagedData && totalPages > 1">
+    <button class="page-btn" [disabled]="pagedData.first" (click)="onPageChange(0)">«</button>
+    <button class="page-btn" [disabled]="pagedData.first" (click)="onPageChange(currentPage - 1)">‹</button>
+    <button
+      class="page-btn"
+      *ngFor="let p of pageRange"
+      [class.active]="p === currentPage"
+      (click)="onPageChange(p)"
+    >{{ p + 1 }}</button>
+    <button class="page-btn" [disabled]="pagedData.last" (click)="onPageChange(currentPage + 1)">›</button>
+    <button class="page-btn" [disabled]="pagedData.last" (click)="onPageChange(totalPages - 1)">»</button>
+  </div>
+</div>
