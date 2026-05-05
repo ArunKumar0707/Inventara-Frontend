@@ -5,7 +5,7 @@ import { Category } from '../models/category.model';
 
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
-  private readonly baseUrl = 'http://localhost:8080/api/categories';
+  private readonly baseUrl = 'https://inventara-backend-production.up.railway.app/api/categories';
 
   constructor(private http: HttpClient) {}
 
