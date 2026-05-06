@@ -7,8 +7,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,400&display=swap');
 
 /* CSS Variables – Dark Theme */
+/* --bg:              #0f0f11; */
 :root {
-  --bg:              #0f0f11;
+  --bg:              #FFFFFF;
   --surface:         #18181c;
   --surface-raised:  #1e1e24;
   --border:          #2a2a32;
